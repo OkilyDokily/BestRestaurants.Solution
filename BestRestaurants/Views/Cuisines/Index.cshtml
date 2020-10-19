@@ -1,0 +1,8 @@
+@using BestRestaurants.Models;
+
+@foreach (Cuisine cuisine in @Model)
+{
+  <p>@Html.ActionLink(cuisine.CuisineType,"Details",new {id = cuisine.CuisineId})</p>
+}
+
+<p>@Html.ActionLink("Make a new cuisine type","Create")</p>

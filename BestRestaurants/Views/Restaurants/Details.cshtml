@@ -1,0 +1,6 @@
+@model BestRestaurants.Models.Restaurant
+
+<p>@Model.Name</p>
+
+<p>@Html.ActionLink("Edit this restaurant", "Edit", new { id = @Model.RestaurantId })</p>
+<p>@Html.ActionLink("Delete this cuisine", "Delete", new { id = @Model.RestaurantId })</p>

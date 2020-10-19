@@ -1,0 +1,15 @@
+@model BestRestaurants.Models.Restaurant
+
+@using(Html.BeginForm())
+{
+  Html.LabelFor(model => model.Name);
+  Html.TextBoxFor(Model => Model.Name);
+
+  Html.LabelFor(model => model.Description);
+  Html.TextBoxFor(model => model.Description);
+
+  Html.DropDownList()
+
+  <input type="submit" value="create new restaurant">
+
+}

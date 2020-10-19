@@ -1,0 +1,7 @@
+@model BestRestaurants.Models.Cuisine
+
+<p>@Model.CuisineType</p>
+
+<p>@Html.ActionLink("Edit this cuisine", "Edit", new { id = @Model.CuisineId })</p>
+<p>@Html.ActionLink("Delete this cuisine", "Delete", new { id = @Model.CuisineId })</p>
+
