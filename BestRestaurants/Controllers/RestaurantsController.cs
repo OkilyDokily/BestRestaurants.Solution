@@ -11,20 +11,20 @@ namespace BestRestaurants.Controllers
   {
     private readonly BestRestaurantsContext _db;
 
-    RestaurantsController(BestRestaurantsContext db)
+    public RestaurantsController(BestRestaurantsContext db)
     {
       _db = db;
     }
 
     public ActionResult Index()
     {
-      List<Restaurant> restaurants = _db.Restaurants.Include(i => i.CuisineRef).ToList();
+      List<Restaurant> restaurants = _db.Restaurants.Include(restaurant => restaurant.Cuisine).ToList();
       return View(restaurants);
     }
 
     public ActionResult Create()
     {
-      ViewBag.CategoryId = new SelectList(_db.Cuisines, "CuisinesId", "Name");
+      ViewBag.CuisineId = new SelectList(_db.Cuisines, "CuisineId", "CuisineType");
       return View();
     }
 
@@ -38,6 +38,13 @@ namespace BestRestaurants.Controllers
 
     public ActionResult Edit(int id)
     {
+      ViewBag.CuisineId = new SelectList(_db.Cuisines,"CuisineId","CuisineType");
+      Restaurant restaurant = _db.Restaurants.FirstOrDefault(x => x.RestaurantId == id);
+      return View(restaurant);
+    }
+
+    public ActionResult Details(int id)
+    {
       Restaurant restaurant = _db.Restaurants.FirstOrDefault(x => x.RestaurantId == id);
       return View(restaurant);
     }
@@ -45,6 +52,7 @@ namespace BestRestaurants.Controllers
     [HttpPost]
     public ActionResult Edit(Restaurant restaurant)
     {
+
       _db.Entry(restaurant).State = EntityState.Modified;
       return RedirectToAction("Index");
     }
