@@ -8,8 +8,8 @@
   Html.LabelFor(model => model.Description);
   Html.TextBoxFor(model => model.Description);
 
-  Html.DropDownList()
+  Html.Label("Cuisine Type");
+  Html.DropDownList("CuisinesId");
 
   <input type="submit" value="create new restaurant">
-
 }
