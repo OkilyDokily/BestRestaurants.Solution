@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 
 namespace BestRestaurants.Controllers
 {
@@ -24,6 +25,7 @@ namespace BestRestaurants.Controllers
 
     public ActionResult Create()
     {
+      ViewBag.CuisinesAreEmpty = _db.Cuisines.ToList().Count == 0;
       ViewBag.CuisineId = new SelectList(_db.Cuisines, "CuisineId", "CuisineType");
       return View();
     }
@@ -33,12 +35,12 @@ namespace BestRestaurants.Controllers
     {
       _db.Restaurants.Add(restaurant);
       _db.SaveChanges();
-      return View();
+      return RedirectToAction("Index");
     }
 
     public ActionResult Edit(int id)
     {
-      ViewBag.CuisineId = new SelectList(_db.Cuisines,"CuisineId","CuisineType");
+      ViewBag.CuisineId = new SelectList(_db.Cuisines, "CuisineId", "CuisineType");
       Restaurant restaurant = _db.Restaurants.FirstOrDefault(x => x.RestaurantId == id);
       return View(restaurant);
     }
@@ -52,7 +54,6 @@ namespace BestRestaurants.Controllers
     [HttpPost]
     public ActionResult Edit(Restaurant restaurant)
     {
-
       _db.Entry(restaurant).State = EntityState.Modified;
       return RedirectToAction("Index");
     }

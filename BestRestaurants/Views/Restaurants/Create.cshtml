@@ -1,15 +1,28 @@
+@{
+  Layout = "_Layout";
+}
+
 @model BestRestaurants.Models.Restaurant
-
-@using (Html.BeginForm())
+@if (ViewBag.CuisinesAreEmpty == true)
 {
-  @Html.LabelFor(model => model.Name);
-  @Html.TextBoxFor(Model => Model.Name);
-
-  @Html.LabelFor(model => model.Description);
-  @Html.TextBoxFor(model => model.Description);
-
-  @Html.Label("Cuisine Type");
-  @Html.DropDownList("CuisineId");
-
-  <input type="submit" value="create new restaurant">
+  <p>You must have at least one cuisine type before you can add a restaurant</p>
+}
+else
+{
+  @using (Html.BeginForm())
+  {
+    <div class="form-group">
+      @Html.LabelFor(model => model.Name)
+      @Html.TextBoxFor(Model => Model.Name,new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+      @Html.LabelFor(model => model.Description)
+      @Html.TextBoxFor(model => model.Description,new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+      @Html.Label("Cuisine Type")
+      @Html.DropDownList("CuisineId")
+    </div>
+    <input type="submit" value="create new restaurant" class="btn btn-success">
+  }
 }

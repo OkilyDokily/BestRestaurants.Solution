@@ -1,16 +1,23 @@
+@{
+  Layout = "_Layout";
+}
+
 @model BestRestaurants.Models.Restaurant
 
-@using(Html.BeginForm())
+@using (Html.BeginForm())
 {
   Html.HiddenFor(model => model.RestaurantId);
-  Html.LabelFor(model => model.Name);
-  Html.EditorFor(Model => Model.Name);
-
-  Html.LabelFor(model => model.Description);
-  Html.EditorFor(model => model.Description);
-
-  Html.Label("Cuisine Type");
-  Html.DropDownList("CuisinesId");
-
-  <input type="submit" value="create new restaurant">
+  <div class="form-group">
+    @Html.LabelFor(model => model.Name);
+    @Html.EditorFor(Model => Model.Name,new { @class = "form-control" });
+  </div>
+  <div class="form-group">
+    @Html.LabelFor(model => model.Description);
+    @Html.EditorFor(model => model.Description,new { @class = "form-control" });
+  </div>
+  <div class="form-group">
+    @Html.Label("Cuisine Type");
+    @Html.DropDownList("CuisinesId");
+  </div>
+  <input type="submit" value="create new restaurant" class="btn btn-success">
 }

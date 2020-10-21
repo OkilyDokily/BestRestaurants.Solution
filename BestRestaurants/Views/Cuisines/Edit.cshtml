@@ -1,3 +1,6 @@
+@{
+  Layout = "_Layout";
+}
 
 @model BestRestaurants.Models.Cuisine
 
@@ -8,10 +11,10 @@
 @using (Html.BeginForm())
 {
   @Html.HiddenFor(model => model.CuisineId)
-
-  @Html.LabelFor(model => model.CuisineType)
-  @Html.EditorFor(model => model.CuisineType)
-
+  <div class="form-group">
+    @Html.LabelFor(model => model.CuisineType)
+    @Html.EditorFor(model => model.CuisineType,new { @class = "form-control" })
+  </div>
   <input type="submit" value="Save" />
 }
 

@@ -1,7 +1,11 @@
+@{
+  Layout = "_Layout";
+}
+
 @model BestRestaurants.Models.Restaurant
 
 <p>@Model.Name</p>
 <p>@Model.Description</p>
-
+<hr style="width:50%;text-align:left;margin-left:0">
 <p>@Html.ActionLink("Edit this restaurant", "Edit", new { id = @Model.RestaurantId })</p>
 <p>@Html.ActionLink("Delete this restaurant", "Delete", new { id = @Model.RestaurantId })</p>

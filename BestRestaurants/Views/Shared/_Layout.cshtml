@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="~/css/bootstrap.css">
+  <link rel="stylesheet" href="~/css/styles.css">
+  <title>Best Restaurants</title>
+</head>
+
+<body>
+  <div class="container">
+    @Html.Partial("Header")
+    @RenderBody()
+    <p>@Html.ActionLink("Go back to home page","Index","Home")</p>
+  </div>
+</body>
+
+</html>
