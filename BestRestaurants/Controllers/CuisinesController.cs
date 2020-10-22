@@ -67,6 +67,13 @@ namespace BestRestaurants.Controllers
       Cuisine cuisine = _db.Cuisines.FirstOrDefault(c => c.CuisineId == id);
       _db.Cuisines.Remove(cuisine);
       _db.SaveChanges();
+      List<Restaurant> restaurants = _db.Restaurants.Where(r => r.CuisineId == cuisine.CuisineId).ToList();
+      foreach(Restaurant r in restaurants)
+      {
+        r.CuisineId = -1;
+        _db.Entry(r).State = EntityState.Modified;
+        _db.SaveChanges();
+      }
       return RedirectToAction("Index");
     }
   }

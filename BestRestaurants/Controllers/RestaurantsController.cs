@@ -20,7 +20,10 @@ namespace BestRestaurants.Controllers
     public ActionResult Index()
     {
       List<Restaurant> restaurants = _db.Restaurants.Include(restaurant => restaurant.Cuisine).ToList();
-      return View(restaurants);
+      List<Restaurant> restaurants2 = _db.Restaurants.ToList().FindAll(x => x.CuisineId == -1).ToList();
+      List<Restaurant> restaurants3 = restaurants.Concat(restaurants2).ToList();
+
+      return View(restaurants3);
     }
 
     public ActionResult Create()
@@ -45,17 +48,18 @@ namespace BestRestaurants.Controllers
       return View(restaurant);
     }
 
-    public ActionResult Details(int id)
-    {
-      Restaurant restaurant = _db.Restaurants.FirstOrDefault(x => x.RestaurantId == id);
-      return View(restaurant);
-    }
-
     [HttpPost]
     public ActionResult Edit(Restaurant restaurant)
     {
       _db.Entry(restaurant).State = EntityState.Modified;
+      _db.SaveChanges();
       return RedirectToAction("Index");
+    }
+
+    public ActionResult Details(int id)
+    {
+      Restaurant restaurant = _db.Restaurants.FirstOrDefault(x => x.RestaurantId == id);
+      return View(restaurant);
     }
 
     public ActionResult Delete(int id)
@@ -70,7 +74,7 @@ namespace BestRestaurants.Controllers
       Restaurant restaurant = _db.Restaurants.FirstOrDefault(x => x.RestaurantId == id);
       _db.Restaurants.Remove(restaurant);
       _db.SaveChanges();
-      return View(restaurant);
+      return RedirectToAction("Index");
     }
   }
 }

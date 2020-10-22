@@ -9,8 +9,8 @@
 @using (Html.BeginForm())
 {
   <div class="form-group">
-    @Html.LabelFor(model => model.CuisineType);
-    @Html.TextBoxFor(model => model.CuisineType,new { @class = "form-control" });
+    @Html.LabelFor(model => model.CuisineType)
+    @Html.TextBoxFor(model => model.CuisineType,new { @class = "form-control" })
   </div>
   <input type="submit" value="Add cuisine type" class="btn btn-success">
 }
