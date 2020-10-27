@@ -35,8 +35,7 @@ namespace BestRestaurants.Controllers
 
     public ActionResult Details(int id)
     {
-      Cuisine cuisine = _db.Cuisines.FirstOrDefault(c => c.CuisineId == id);
-      cuisine.Restaurants = _db.Restaurants.Where(r => r.CuisineId == cuisine.CuisineId).ToList();
+      Cuisine cuisine = _db.Cuisines.Include(c => c.Restaurants).FirstOrDefault(c => c.CuisineId == id);
 
       return View(cuisine);
     }
@@ -68,7 +67,7 @@ namespace BestRestaurants.Controllers
       _db.Cuisines.Remove(cuisine);
       _db.SaveChanges();
       List<Restaurant> restaurants = _db.Restaurants.Where(r => r.CuisineId == cuisine.CuisineId).ToList();
-      foreach(Restaurant r in restaurants)
+      foreach (Restaurant r in restaurants)
       {
         r.CuisineId = -1;
         _db.Entry(r).State = EntityState.Modified;
